@@ -13,6 +13,9 @@ services:
       start_period: 10s
 
   aspnetcore.examples.entityframeworkcore.api:
+    depends_on:
+      aspnetcore.examples.entityframeworkcore.data:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
