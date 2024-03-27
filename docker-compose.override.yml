@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  aspnetcore.examples.entityframeworkcore.data:
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Strong@Passw0rd
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  aspnetcore.examples.entityframeworkcore.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__Default=Server=aspnetcore.examples.entityframeworkcore.data;Database=EFCoreExample;User Id=SA;Password=Strong@Passw0rd;TrustServerCertificate=True
+      - Infrastructure__Data__MigrateOnStartup=true
+    ports:
+      - "54876:8080"

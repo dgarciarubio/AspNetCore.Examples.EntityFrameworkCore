@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  aspnetcore.examples.entityframeworkcore.data:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: aspnetcore.exmaples.entityframeworkcore.data 
+    
+  aspnetcore.examples.entityframeworkcore.api:
+    image: ${DOCKER_REGISTRY-}aspnetcoreexamplesentityframeworkcoreapi
+    container_name: aspnetcore.exmaples.entityframeworkcore.api 
+    depends_on:
+      aspnetcore.examples.entityframeworkcore.data:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: AspNetCore.Examples.EntityFrameworkCore.Api/Dockerfile
