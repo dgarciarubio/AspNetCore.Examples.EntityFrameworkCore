@@ -4,9 +4,9 @@ This project serves as an example of how to use and test Entity Framework Core i
 
 It makes use of the following technologies and projects:
 
-- [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [ASP.NET Core 8.0](https://learn.microsoft.com/aspnet/core/?view=aspnetcore-8.0)
-- [Swashbuckle](https://learn.microsoft.com/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-8.0)
+- [.NET 9.0](https://dotnet.microsoft.com/download/dotnet/9.0)
+- [ASP.NET Core 9.0](https://learn.microsoft.com/aspnet/core/?view=aspnetcore-9.0)
+- [Swashbuckle](https://learn.microsoft.com/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-9.0)
 - [Entity Framework Core](https://learn.microsoft.com/ef/core/)
 - [Docker](https://www.docker.com/)
 - [SQL Server](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&tabs=cli&pivots=cs1-bash)
@@ -23,7 +23,7 @@ Access the web api at http://localhost:54876/swagger and try to call the endpoin
 
 # How to test
 Make sure to have docker running, and run the tests from the Test Explorer in Visual Studio, or from a terminal by executing `dotnet test .\AspNetCore.Examples.EntityFrameworkCore.sln` in the root folder.
-[More about ASP.NET Core 8.0 integration tests](https://learn.microsoft.com/aspnet/core/test/integration-tests?view=aspnetcore-8.0)
+[More about ASP.NET Core 9.0 integration tests](https://learn.microsoft.com/aspnet/core/test/integration-tests?view=aspnetcore-9.0)
 
 To run tests and generate an html coverage analysis report, run the `coverage_report.ps1` powershell script  in the root folder.
 [More about code coverage for unit testing in .NET](https://learn.microsoft.com/dotnet/core/testing/unit-testing-code-coverage)
