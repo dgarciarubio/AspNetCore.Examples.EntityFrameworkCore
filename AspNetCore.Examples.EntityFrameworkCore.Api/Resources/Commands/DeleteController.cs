@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources.Commands;
 
 [Tags("Resources")]
-public class DeleteController(AppDbContext dbContext) : ControllerBase
+public class DeleteController(AppDbContext dbContext) : Controller
 {
     private readonly AppDbContext _dbContext = dbContext;
 

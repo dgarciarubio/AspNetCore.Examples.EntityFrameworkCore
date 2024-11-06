@@ -1,3 +1,4 @@
+using AspNetCore.Examples.EntityFrameworkCore.Api.Extensions;
 using AspNetCore.Examples.EntityFrameworkCore.Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -6,11 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddControllers().Services
-    .AddEndpointsApiExplorer()
-    .AddSwaggerGen(options =>
-    {
-        options.SupportNonNullableReferenceTypes();
-    });
+    .AddHttpContextAccessor()
+    .AddCustomOpenApi();
 
 builder.Services
     .AddDbContext<AppDbContext>(dbContextBuilder =>
@@ -20,8 +18,11 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseCustomOpenApi(builder.Configuration);
+}
+
 app.MapControllers();
 
 if (builder.Configuration.GetValue("Infrastructure:Data:MigrateOnStartup", defaultValue: false))

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources.Queries;
 
 [Tags("Resources")]
-public class GetAllController(AppDbContext dbContext) : ControllerBase
+public class GetAllController(AppDbContext dbContext) : Controller
 {
     private readonly AppDbContext _dbContext = dbContext;
 
