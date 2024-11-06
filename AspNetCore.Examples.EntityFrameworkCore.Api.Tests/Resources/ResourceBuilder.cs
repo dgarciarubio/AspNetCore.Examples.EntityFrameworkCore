@@ -6,19 +6,18 @@ namespace AspNetCore.Examples.EntityFrameworkCore.Api.Tests.Resources;
 
 public class ResourceBuilder(IServiceProvider serviceProvider, Func<ResourceDto, ResourceDto> configureResource)
 {
-    private ResourceDto _resourceDto = new ResourceDto
+    private readonly ResourceDto _resourceDto = configureResource(new()
     {
         Id = Guid.NewGuid(),
         Name = "TestResource",
-    };
+    });
 
     public async Task<ResourceDto> InTheDatabase()
     {
         using var scope = serviceProvider.CreateScope();
         using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        var resourceDto = configureResource(_resourceDto);
-        var resource = new Resource(resourceDto.Id, resourceDto.Name);
+        var resource = new Resource(_resourceDto.Id, _resourceDto.Name);
         appDbContext.Resources.Add(resource);
         await appDbContext.SaveChangesAsync();
 

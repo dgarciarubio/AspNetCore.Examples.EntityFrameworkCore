@@ -18,7 +18,7 @@ public class Requests_to_get_all_resources_should(HostFixture hostFixture)
         var response = await _server.CreateRequest("resources")
             .GetAsync();
 
-        response.Should().BeSuccessful();
+        response.Should().HaveStatusCode(HttpStatusCode.OK);
         var resources = await response.Content.ReadFromJsonAsync<ResourceDto[]>();
         resources.Should().BeEquivalentTo(new[] {
             resource1,
@@ -33,7 +33,7 @@ public class Requests_to_get_all_resources_should(HostFixture hostFixture)
         var response = await _server.CreateRequest("resources")
             .GetAsync();
 
-        response.Should().BeSuccessful();
+        response.Should().HaveStatusCode(HttpStatusCode.OK);
         var resources = await response.Content.ReadFromJsonAsync<ResourceDto[]>();
         resources.Should().BeEmpty();
     }

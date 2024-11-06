@@ -19,19 +19,19 @@ public class Requests_to_delete_resource_should(HostFixture hostFixture)
         var response = await _server.CreateRequest($"resources/{id}")
             .SendAsync("DELETE");
 
-        response.Should().BeSuccessful();
+        response.Should().HaveStatusCode(HttpStatusCode.NoContent);
         _appDbContext.Resources.Should().NotContain(r => r.Id == id);
     }
 
     [Fact]
     [ResetDatabase]
-    public async Task Not_delete_a_non_existing_resource()
+    public async Task Not_fail_when_deleting_a_non_existing_resource()
     {
         var id = Guid.NewGuid();
 
         var response = await _server.CreateRequest($"resources/{id}")
             .SendAsync("DELETE");
 
-        response.Should().HaveStatusCode(HttpStatusCode.NotFound);
+        response.Should().HaveStatusCode(HttpStatusCode.NoContent);
     }
 }

@@ -4,6 +4,7 @@ namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources;
 
 [ApiController]
 [Route("resources")]
-public class ResourcesController : ControllerBase
+[Tags("Resources")]
+public class ControllerBase : Microsoft.AspNetCore.Mvc.ControllerBase
 {
 }

@@ -18,7 +18,7 @@ public class Requests_to_get_resource_should(HostFixture hostFixture)
         var response = await _server.CreateRequest($"resources/{id}")
             .GetAsync();
 
-        response.Should().BeSuccessful();
+        response.Should().HaveStatusCode(HttpStatusCode.OK);
         var result = await response.Content.ReadFromJsonAsync<ResourceDto>();
         result.Should().BeEquivalentTo(resource);
     }

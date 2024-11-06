@@ -5,17 +5,22 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources.Queries;
 
 [Tags("Resources")]
-public class GetResourceController(AppDbContext dbContext) : ResourcesController
+public class GetController(AppDbContext dbContext) : ControllerBase
 {
-    [HttpGet("{id}")]
+    private readonly AppDbContext _dbContext = dbContext;
+
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResourceDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id)
     {
-        var resource = await dbContext.Resources
+        var resource = await _dbContext.Resources
             .AsNoTracking()
             .SingleOrDefaultAsync(r => r.Id == id);
-        if (resource is null) return NotFound();
-        return Ok(resource.AsDto());
+        return resource switch
+        {
+            Resource => Ok(resource.AsDto()),
+            null => NotFound(),
+        };
     }
 }

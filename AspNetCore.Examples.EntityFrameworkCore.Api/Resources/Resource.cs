@@ -1,13 +1,7 @@
 ﻿namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources;
 
-public class Resource
+public class Resource(Guid id, string name)
 {
-    public Guid Id { get; }
-    public string Name { get; set; }
-
-    public Resource(Guid id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
+    public Guid Id { get; } = id;
+    public string Name { get; set; } = name;
 }

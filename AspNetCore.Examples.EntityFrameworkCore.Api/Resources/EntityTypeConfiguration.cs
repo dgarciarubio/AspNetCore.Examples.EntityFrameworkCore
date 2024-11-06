@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AspNetCore.Examples.EntityFrameworkCore.Api.Resources;
 
-public class ResourceEntityConfiguration : IEntityTypeConfiguration<Resource>
+public class EntityTypeConfiguration : IEntityTypeConfiguration<Resource>
 {
     public void Configure(EntityTypeBuilder<Resource> builder)
     {
